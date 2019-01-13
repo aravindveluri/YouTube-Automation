@@ -118,7 +118,7 @@ subscribeChannel(mydriver, "https://www.youtube.com/channel/UCCq1xDJMBRF61kiOgU9
 unsubscribeChannel(mydriver, "https://www.youtube.com/channel/UCfM3zsQsOnfWNUppiycmBuw")
 
 #prints subscribed channels
-print "Subscribed channels: "
+print "\nSubscribed channels: "
 for chn in subbedChannels:
     print chn
 #prints unsubscribed channels
