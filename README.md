@@ -1,6 +1,7 @@
 # Aravind-Zense-Project
 An unsuccessful optional project I have been working on (unsuccessful_gmail_creator.py) has been uploaded. It is not the main project.
 The main project script is youtube_automation.py
+
 Instructions on how to run the code:
 1. Python Selenium module, Mozilla Firefox browser and Mozilla Firefox WebDriver(geckodriver executable placed in /usr/local/bin) are required to run this python automation script.
 2. Open Ubuntu Terminal and execute the python file using: python youtube_automation.py
