@@ -1,5 +1,5 @@
 # Aravind-Zense-Project
-Instruction on how to run the code:
+Instructions on how to run the code:
 1. Python Selenium module, Mozilla Firefox browser and Mozilla Firefox WebDriver(geckodriver executable placed in /usr/local/bin) are required to run this python automation script.
 2. Open Ubuntu Terminal and execute the python file using: python youtube_automation.py
 3. First, the program will ask for gmail ID input. Enter your gmail ID or "projecttest178@gmail.com" which is a test account I created for this project and click enter key.
