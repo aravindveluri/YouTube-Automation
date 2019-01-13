@@ -6,11 +6,11 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-mydriver = webdriver.Firefox()  #Opens Firefox browser 
+mydriver = webdriver.Firefox()  #Opens Firefox browser(if this doesn't work make sure that executable geckodriver file is placed inside /usr/local/bin/ directory)
 mydriver.maximize_window() #Maximizes the window
 
 #uBlockExtension= '/home/aravindv/.mozilla/firefox/39r924ap.default/extensions/{2b10c1c8-a11f-4bad-fe9c-1c11e82cac42}.xpi'
-#identifier = mydriver.install_addon(uBlockExtension, temporary=True)
+#identifier = mydriver.install_addon(uBlockExtension, temporary=True) #to install the addon
 #mydriver.uninstall_addon(identifier) #to uninstall the addon
 #First, uBlock should be installed in a regular Firefox browser.
 #Path and .xpi file name may not be same for other devices, so it should be changed accordingly after previous step
