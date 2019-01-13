@@ -6,11 +6,11 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-mydriver = webdriver.Firefox()  #Opens Firefox browser(if this doesn't work make sure that executable geckodriver file is placed inside /usr/local/bin/ directory)
+mydriver = webdriver.Firefox()  #Opens Firefox browser(if this doesn't work make sure that executable geckodriver file is placed inside /usr/local/bin/ directory) 
 mydriver.maximize_window() #Maximizes the window
 
 #uBlockExtension= '/home/aravindv/.mozilla/firefox/39r924ap.default/extensions/{2b10c1c8-a11f-4bad-fe9c-1c11e82cac42}.xpi'
-#identifier = mydriver.install_addon(uBlockExtension, temporary=True) #to install the addon
+#identifier = mydriver.install_addon(uBlockExtension, temporary=True)
 #mydriver.uninstall_addon(identifier) #to uninstall the addon
 #First, uBlock should be installed in a regular Firefox browser.
 #Path and .xpi file name may not be same for other devices, so it should be changed accordingly after previous step
@@ -110,11 +110,11 @@ def unsubscribeChannel(driver, link):
 
 #Few channels to subscribe and unsubscribe. More can be added by passing the channel url to the function.
 subscribeChannel(mydriver, "https://www.youtube.com/user/PewDiePie")
-unsubscribeChannel(mydriver,"https://www.youtube.com/user/tseries" )
+subscribeChannel(mydriver,"https://www.youtube.com/user/tseries" )
+unsubscribeChannel(mydriver, "https://www.youtube.com/channel/UCCq1xDJMBRF61kiOgU90_kw")
 subscribeChannel(mydriver, "https://www.youtube.com/channel/UC6nSFpj9HTCZ5t-N3Rm3-HA")
 subscribeChannel(mydriver, 'https://www.youtube.com/user/2CELLOSlive')
 unsubscribeChannel(mydriver, "https://www.youtube.com/user/tseries")
-subscribeChannel(mydriver, "https://www.youtube.com/channel/UCCq1xDJMBRF61kiOgU90_kw")
 unsubscribeChannel(mydriver, "https://www.youtube.com/channel/UCfM3zsQsOnfWNUppiycmBuw")
 
 #prints subscribed channels
@@ -145,8 +145,8 @@ def topResults(driver, search_item):
     time.sleep(2) #To load all the video elements
     vids = vidsParent.find_elements_by_tag_name('ytd-video-renderer')
     for vid in vids[:10]:
-        thumbnail = WebDriverWait(vid, 15).until(expected_conditions.element_to_be_clickable((By.TAG_NAME, 'h3')))
-        link = WebDriverWait(thumbnail, 15).until(expected_conditions.element_to_be_clickable((By.TAG_NAME, 'a')))
+        video_title = WebDriverWait(vid, 15).until(expected_conditions.element_to_be_clickable((By.TAG_NAME, 'h3')))
+        link = WebDriverWait(video_title, 15).until(expected_conditions.element_to_be_clickable((By.TAG_NAME, 'a')))
         href = link.get_attribute('href')
         top.append(str(href))
         channelName = vid.find_element_by_id('byline')
@@ -156,26 +156,6 @@ def topResults(driver, search_item):
         uleddate.append(str(metadata[1].text))
     return zip(top, channel, views, uleddate)
 
-#Function to like a youtube video
-def Like(driver):
-    try:
-        like = driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[3]/div[1]/div/div[5]/div[2]/ytd-video-primary-info-renderer/div/div/div[3]/div/ytd-menu-renderer/div/ytd-toggle-button-renderer[1]/a')#.click()
-        #like.click()
-        if (like.find_element_by_tag_name('yt-icon-button')).get_attribute('class') == 'style-scope ytd-toggle-button-renderer style-text':
-            like.click()
-            print "You liked the video"
-    except NoSuchElementException as e:
-        print "No video is playing"
-
-#Function to dislike a youtube video
-def Dislike(driver):
-    try:
-        dislike = driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[3]/div[1]/div/div[5]/div[2]/ytd-video-primary-info-renderer/div/div/div[3]/div/ytd-menu-renderer/div/ytd-toggle-button-renderer[2]/a')
-        if (dislike.find_element_by_tag_name('yt-icon-button')).get_attribute('aria-pressed') == "false":
-            dislike.click()
-            print "You disliked the video"
-    except NoSuchElementException as e:
-            print "No video is playing"
 
 searchInfo = raw_input("Enter what you want to search on YouTube: ")  #Search something on youtube
 topLinksInfo = topResults(mydriver, searchInfo)
@@ -188,6 +168,31 @@ chooseResult = input("\nEnter(in number ranging 1-10) which result you want to o
 mydriver.get(topLinksInfo[chooseResult-1][0])
 
 time.sleep(5)
+
+#Function to like a youtube video
+def Like(driver):
+    try:
+        like = driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[3]/div[1]/div/div[5]/div[2]/ytd-video-primary-info-renderer/div/div/div[3]/div/ytd-menu-renderer/div/ytd-toggle-button-renderer[1]/a')
+        if (like.find_element_by_tag_name('yt-icon-button')).get_attribute('class') == 'style-scope ytd-toggle-button-renderer style-text':
+            like.click()
+            print "You liked the video"
+        else:
+            print "You already like the video"
+    except NoSuchElementException as e:
+        print "No video is playing"
+
+#Function to dislike a youtube video
+def Dislike(driver):
+    try:
+        dislike = driver.find_element_by_xpath('/html/body/ytd-app/div[1]/ytd-page-manager/ytd-watch-flexy/div[3]/div[1]/div/div[5]/div[2]/ytd-video-primary-info-renderer/div/div/div[3]/div/ytd-menu-renderer/div/ytd-toggle-button-renderer[2]/a')
+        if (dislike.find_element_by_tag_name('yt-icon-button')).get_attribute('class') == "style-scope ytd-toggle-button-renderer style-text":
+            dislike.click()
+            print "You disliked the video"
+        else:
+            print "You already dislike the video"
+    except NoSuchElementException as e:
+            print "No video is playing"
+
 #Enter if you like or dislike the video
 likeOrDislike = raw_input("Do you like the video?\nType 'yes' if you like it\nOr 'no' if you disliked it\nOr just press enter to remain neutral\nYour Response: ")
 time.sleep(2)
@@ -195,6 +200,3 @@ if(likeOrDislike == "yes"):
     Like(mydriver)
 if(likeOrDislike == "no"):
     Dislike(mydriver)
-
-
-
