@@ -1,4 +1,5 @@
-# Aravind-Zense-Project
+YouTube Automation using Selenium in Python
+
 An unsuccessful optional project I have been working on (unsuccessful_gmail_creator.py) has been uploaded. It is not the main project.
 The main project script is youtube_automation.py
 
@@ -10,4 +11,3 @@ Instructions on how to run the code:
 5. Next, the program will ask for input terms which the program will search on YouTube.
 6. Next, it will print top ten results for the search, and asks to input which video should be played. Finally, it asks whether you like or disliked to video and after entering corresponding input, the programs exits, while the browser stays open.
 
-The demo video is included in the project report pdf file.
